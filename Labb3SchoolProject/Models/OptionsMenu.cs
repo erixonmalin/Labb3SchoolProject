@@ -11,42 +11,49 @@ namespace Labb3SchoolProject.Models
     {
         public static void MainMenu()
         {
-            string input;
-            Console.WriteLine("Please, choose an option:\n" +
-                              "\n1 = See all students\n" +
-                              "2 = See all student in a class\n" +
-                              "3 = Add new staff\n" +
-                              "4 = Add new student\n" +
-                              "5 = Exit program");
-
-            input = Console.ReadLine();
-
-            switch (input)
+            string exit;
+            do
             {
-                case "1":
-                    OptionAllStudents();
-                    break;
+                string input;
+                Console.WriteLine("\nPlease, choose an option:\n" +
+                                  "\n1 = See all students\n" +
+                                  "2 = See all student in a class\n" +
+                                  "3 = Add new staff\n" +
+                                  "4 = Add new student\n" +
+                                  "5 = Exit program");
 
-                case "2":
-                    OptionSeeClass();
-                    break;
+                input = Console.ReadLine();
 
-                case "3":
-                    AddNewStaff();
-                    break;
+                switch (input)
+                {
+                    case "1":
+                        OptionAllStudents();
+                        break;
 
-                case "4":
-                    AddNewStudent();
-                    break;
+                    case "2":
+                        OptionSeeClass();
+                        break;
 
-                case "5":
-                    Console.WriteLine("\nWelcome back!");
-                    break;
+                    case "3":
+                        AddNewStaff();
+                        break;
 
-                default:
-                    Console.WriteLine("\nNot a valid choice.");
-                    break;
-            }
+                    case "4":
+                        AddNewStudent();
+                        break;
+
+                    case "5":
+                        Console.WriteLine("\nWelcome back!");
+                        break;
+ 
+                    default:
+                        Console.WriteLine("\nNot a valid choice.");
+                        break;
+                }
+                Console.WriteLine("\nPush enter if you want to see the menu.\n" +
+                    "Push 'exit' to close the program.");
+                exit = Console.ReadLine();
+            } while (exit.ToLower() != "exit");
         }
 
         public static void OptionAllStudents()
@@ -75,7 +82,7 @@ namespace Labb3SchoolProject.Models
                         }
 
                         Console.WriteLine("\nWould you like the list sorted by descending? Please enter 1.\n" +
-                                          "Press 3 to exit the program.\n");
+                                          "Press 3 to go back.\n");
 
                         input = Console.ReadLine();
 
@@ -88,8 +95,8 @@ namespace Labb3SchoolProject.Models
                             {
                                 Console.WriteLine(student.FirstName + " " + student.LastName);
                             }
-                            Console.WriteLine("\nPress 1 to sort the list by ascending.\n" + 
-                                              "Press 3 to exit the program.");
+                            Console.WriteLine("\nPress 1 to sort the list by ascending.\n" +
+                                              "Press 3 to go back.");
                         }
                         else if (input != "1")
                         {
@@ -124,7 +131,7 @@ namespace Labb3SchoolProject.Models
                         }
 
                         Console.WriteLine("\nWould you like the list sorted by descending? Please enter 1.\n" +
-                                          "Press 3 to exit the program.\n");
+                                          "Press 3 to go back.\n");
 
                         input = Console.ReadLine();
 
@@ -138,7 +145,7 @@ namespace Labb3SchoolProject.Models
                                 Console.WriteLine(student.LastName + " " + student.FirstName);
                             }
                             Console.WriteLine("\nPress 1 to sort the list by ascending.\n" +
-                                              "Press 3 to exit the program.");
+                                              "Press 3 to go back.");
                         }
                         else if (input != "1")
                         {
@@ -186,7 +193,6 @@ namespace Labb3SchoolProject.Models
                     Console.WriteLine($"Year: {student.Year}, {student.FirstName} {student.LastName}");
                 }
             }
-            Console.WriteLine("\nPush enter to exit program.");
         }
 
         public static void AddNewStaff()
