@@ -10,6 +10,7 @@ namespace Labb3SchoolProject.Models
         public int? FkCourseId { get; set; }
         public int? FkEmployeeId { get; set; }
         public int? FkStudentId { get; set; }
+        public int StudentGradeId { get; set; }
 
         public virtual Course? FkCourse { get; set; }
         public virtual Employee? FkEmployee { get; set; }
