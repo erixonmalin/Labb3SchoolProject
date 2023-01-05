@@ -18,16 +18,19 @@ namespace Labb3SchoolProject.Models
                 Console.WriteLine("\nPlease, choose an option:\n" +
                                   "\n1 = See all students\n" +
                                   "2 = See all student in a class\n" +
-                                  "3 = Add new staff\n" +
-                                  "4 = Add new student\n" +
-                                  "5 = Exit program");
+                                  "3 = See student information\n" +
+                                  "4 = Ongoing courses\n" +
+                                  "5 = See teacher departments\n" +
+                                  "6 = Add new staff\n" +
+                                  "7 = Add new student\n" +
+                                  "8 = Exit program");
 
                 input = Console.ReadLine();
 
                 switch (input)
                 {
                     case "1":
-                        OptionAllStudents();
+                        OptionSeeAllStudents();
                         break;
 
                     case "2":
@@ -35,17 +38,28 @@ namespace Labb3SchoolProject.Models
                         break;
 
                     case "3":
+                        SeeStudentInfo();
+                        break;
+                    //Visa alla information om eleverna
+
+                    case "4":
+                    //visa alla aktiva kurser
+
+                    case "5":
+                    //Se läraravdelningar (spec och reg)
+
+                    case "6":
                         AddNewStaff();
                         break;
 
-                    case "4":
+                    case "7":
                         AddNewStudent();
                         break;
 
-                    case "5":
+                    case "8":
                         Console.WriteLine("\nWelcome back!");
                         break;
- 
+
                     default:
                         Console.WriteLine("\nNot a valid choice.");
                         break;
@@ -56,7 +70,7 @@ namespace Labb3SchoolProject.Models
             } while (exit.ToLower() != "exit");
         }
 
-        public static void OptionAllStudents()
+        public static void OptionSeeAllStudents()
         {
             Console.Clear();
             string input = "";
@@ -193,6 +207,11 @@ namespace Labb3SchoolProject.Models
                     Console.WriteLine($"Year: {student.Year}, {student.FirstName} {student.LastName}");
                 }
             }
+        }
+        public static void SeeStudentInfo()
+        {
+            
+
         }
 
         public static void AddNewStaff()

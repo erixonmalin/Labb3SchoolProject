@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Labb3SchoolProject.Models;
-using System.ComponentModel.DataAnnotations;
 
 namespace Labb3SchoolProject.Data
 {
     public partial class SchoolDbContext : DbContext
     {
-
-        
         public SchoolDbContext()
         {
         }
@@ -50,12 +47,19 @@ namespace Labb3SchoolProject.Data
 
                 entity.Property(e => e.Department).HasMaxLength(25);
 
+                entity.Property(e => e.EmploymentDate).HasColumnType("date");
+
                 entity.Property(e => e.FirstName).HasMaxLength(20);
 
                 entity.Property(e => e.LastName).HasMaxLength(50);
 
                 entity.Property(e => e.Position)
                     .HasMaxLength(25)
+                    .IsUnicode(false)
+                    .IsFixedLength();
+
+                entity.Property(e => e.TeacherPosition)
+                    .HasMaxLength(10)
                     .IsUnicode(false)
                     .IsFixedLength();
             });
@@ -85,8 +89,6 @@ namespace Labb3SchoolProject.Data
 
             modelBuilder.Entity<StudentGrade>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("StudentGrade");
 
                 entity.Property(e => e.Date).HasColumnType("date");
@@ -100,22 +102,22 @@ namespace Labb3SchoolProject.Data
                 entity.Property(e => e.FkStudentId).HasColumnName("FK_StudentId");
 
                 entity.HasOne(d => d.FkCourse)
-                    .WithMany()
+                    .WithMany(p => p.StudentGrades)
                     .HasForeignKey(d => d.FkCourseId)
                     .HasConstraintName("FK_StudentGrade_Course");
 
                 entity.HasOne(d => d.FkEmployee)
-                    .WithMany()
+                    .WithMany(p => p.StudentGrades)
                     .HasForeignKey(d => d.FkEmployeeId)
                     .HasConstraintName("FK_StudentGrade_Employee");
 
                 entity.HasOne(d => d.FkGradeLevel)
-                    .WithMany()
+                    .WithMany(p => p.StudentGrades)
                     .HasForeignKey(d => d.FkGradeLevelId)
                     .HasConstraintName("FK_StudentGrade_Grade");
 
                 entity.HasOne(d => d.FkStudent)
-                    .WithMany()
+                    .WithMany(p => p.StudentGrades)
                     .HasForeignKey(d => d.FkStudentId)
                     .HasConstraintName("FK_StudentGrade_Student");
             });
@@ -124,7 +126,5 @@ namespace Labb3SchoolProject.Data
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-        
-    } 
-   
+    }
 }
