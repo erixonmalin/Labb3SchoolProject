@@ -20,8 +20,11 @@ namespace Labb3SchoolProject.Data
         public virtual DbSet<Course> Courses { get; set; } = null!;
         public virtual DbSet<Employee> Employees { get; set; } = null!;
         public virtual DbSet<Grade> Grades { get; set; } = null!;
+        public virtual DbSet<OngoingCourse> OngoingCourses { get; set; } = null!;
         public virtual DbSet<Student> Students { get; set; } = null!;
         public virtual DbSet<StudentGrade> StudentGrades { get; set; } = null!;
+        public virtual DbSet<StudentInformation> StudentInformations { get; set; } = null!;
+        public virtual DbSet<TeacherPosition> TeacherPositions { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -74,6 +77,17 @@ namespace Labb3SchoolProject.Data
                 entity.Property(e => e.GradeLevel).ValueGeneratedNever();
             });
 
+            modelBuilder.Entity<OngoingCourse>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("OngoingCourses");
+
+                entity.Property(e => e.CourseId).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.CourseName).HasMaxLength(50);
+            });
+
             modelBuilder.Entity<Student>(entity =>
             {
                 entity.ToTable("Student");
@@ -120,6 +134,34 @@ namespace Labb3SchoolProject.Data
                     .WithMany(p => p.StudentGrades)
                     .HasForeignKey(d => d.FkStudentId)
                     .HasConstraintName("FK_StudentGrade_Student");
+            });
+
+            modelBuilder.Entity<StudentInformation>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("StudentInformation");
+
+                entity.Property(e => e.Course).HasMaxLength(50);
+
+                entity.Property(e => e.Date).HasColumnType("date");
+
+                entity.Property(e => e.Student).HasMaxLength(81);
+
+                entity.Property(e => e.Teacher).HasMaxLength(71);
+            });
+
+            modelBuilder.Entity<TeacherPosition>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("TeacherPositions");
+
+                entity.Property(e => e.TeacherPosition1)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("TeacherPosition")
+                    .IsFixedLength();
             });
 
             OnModelCreatingPartial(modelBuilder);

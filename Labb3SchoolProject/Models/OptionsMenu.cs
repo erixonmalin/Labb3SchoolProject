@@ -19,8 +19,8 @@ namespace Labb3SchoolProject.Models
                                   "\n1 = See all students\n" +
                                   "2 = See all student in a class\n" +
                                   "3 = See student information\n" +
-                                  "4 = Ongoing courses\n" +
-                                  "5 = See teacher departments\n" +
+                                  "4 = See active courses\n" +
+                                  "5 = See number of teachers in all the departments\n" +
                                   "6 = Add new staff\n" +
                                   "7 = Add new student\n" +
                                   "8 = Exit program");
@@ -40,13 +40,14 @@ namespace Labb3SchoolProject.Models
                     case "3":
                         SeeStudentInfo();
                         break;
-                    //Visa alla information om eleverna
-
+ 
                     case "4":
-                    //visa alla aktiva kurser
+                        SeeActiveCourses();
+                        break;
 
                     case "5":
-                    //Se läraravdelningar (spec och reg)
+                        SeeTeacherInfo();
+                        break;
 
                     case "6":
                         AddNewStaff();
@@ -208,10 +209,47 @@ namespace Labb3SchoolProject.Models
                 }
             }
         }
+
         public static void SeeStudentInfo()
         {
-            
+            using (var context = new SchoolDbContext())
+            {
+                var studentInfo = from s in context.StudentInformations
+                                 select s;
+                Console.Clear();
+                foreach (var studInfo in studentInfo)
+                {
+                    Console.WriteLine($"Student: {studInfo.Student}, , Course: {studInfo.Course}, Grade: {studInfo.Grade} \nTeacher: {studInfo.Teacher} Date: {studInfo.Date}\n");
+                }
+            }
+        }
 
+        public static void SeeActiveCourses()
+        {
+            using (var context = new SchoolDbContext())
+            {
+                var allCourses = from c in context.OngoingCourses
+                                      select c;
+                Console.Clear();
+                foreach (var courses in allCourses)
+                {
+                    Console.WriteLine($"Course id: {courses.CourseId}, Course name: {courses.CourseName}");
+                }
+            }
+        }
+
+        public static void SeeTeacherInfo()
+        {
+            using (var context = new SchoolDbContext())
+            {
+                var teacherPosition = from t in context.TeacherPositions
+                                      select t;
+                Console.Clear();
+                foreach (var teacher in teacherPosition)
+                {
+                    Console.WriteLine($"{teacher.TeacherPosition1} {teacher.Number}");
+                }
+            }
         }
 
         public static void AddNewStaff()
