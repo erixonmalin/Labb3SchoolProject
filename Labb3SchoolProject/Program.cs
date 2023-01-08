@@ -18,12 +18,12 @@ namespace Labb3SchoolProject
             //FROM Employee
 
             //--------------------------------------------------------------
-            //--Spara ner ny personal - Lägg till
+            //--Spara ner ny personal 
             //INSERT INTO Employee(FirstName, LastName, Position, Department, Salary, EmploymentDate)
             //VALUES('Olaf', 'Snowman', 'Student guard', 'Student assistant', 15000, '2023-01-02');
 
             //--------------------------------------------------------------
-            //--Spara ner ny elev - Lägg till
+            //--Spara ner ny elev 
             //INSERT INTO Student(FirstName, LastName, PersonalNumber, [Year])
             //VALUES('Elsa', 'Frozen', 18910113 - 3447, 1);
 
