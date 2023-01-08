@@ -23,7 +23,7 @@ namespace Labb3SchoolProject.Models
                                   "5 = See number of teachers in all the departments\n" +
                                   "6 = Add new staff\n" +
                                   "7 = Add new student\n" +
-                                  "8 = Exit program");
+                                  "8 = Exit program\n");
 
                 input = Console.ReadLine();
 
@@ -58,7 +58,7 @@ namespace Labb3SchoolProject.Models
                         break;
 
                     case "8":
-                        Console.WriteLine("\nWelcome back!");
+                        Console.WriteLine("Please confirm with entering 'Exit' to close the program.");
                         break;
 
                     default:
